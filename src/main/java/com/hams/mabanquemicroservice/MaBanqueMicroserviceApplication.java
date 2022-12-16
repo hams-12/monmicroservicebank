@@ -18,7 +18,7 @@ public class MaBanqueMicroserviceApplication {
         SpringApplication.run(MaBanqueMicroserviceApplication.class, args);
     }
     @Bean
-    CommandLineRunner commandLineRunner(BankAccountRepository bankAccountRepository){
+    CommandLineRunner maCommandLineRunner(BankAccountRepository bankAccountRepository){
         return args -> {
             for (int i = 0; i < 10; i++) {
                 BankAccount bankAccount = BankAccount.builder()
