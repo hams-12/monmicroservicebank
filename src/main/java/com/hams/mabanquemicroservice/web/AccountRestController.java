@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api") //Cette deuxième annotation a été utilisé pour montrer qu'on utilise bien springDataRest sans controller
 public class AccountRestController {
     private BankAccountRepository bankAccountRepository;
 
