@@ -4,6 +4,7 @@ import com.hams.mabanquemicroservice.dto.BankAccountRequestDTO;
 import com.hams.mabanquemicroservice.dto.BankAccountResponseDTO;
 import com.hams.mabanquemicroservice.entities.BankAccount;
 import com.hams.mabanquemicroservice.enums.AccoutType;
+import com.hams.mabanquemicroservice.mappers.AccountMapper;
 import com.hams.mabanquemicroservice.repositories.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private BankAccountRepository bankAccountRepository;
+    @Autowired
+    private AccountMapper accountMapper;
     @Override
     public BankAccountResponseDTO addBankAccount(BankAccountRequestDTO bankAccountRequestDTO) {
         BankAccount bankAccount = BankAccount.builder()
@@ -31,14 +34,14 @@ public class AccountServiceImpl implements AccountService {
         BankAccount savedBank = bankAccountRepository.save(bankAccount); //C'est cette ligne seulement qui concerne le service. Le reste doit etre fait dans un mapper
 
         //Le code ci dessous doit être fait dans un mapper normalement
-        BankAccountResponseDTO bankAccountResponseDTO = BankAccountResponseDTO.builder()
+        /*BankAccountResponseDTO bankAccountResponseDTO = BankAccountResponseDTO.builder()
                 .id(savedBank.getId())
                 .balance(savedBank.getBalance())
                 .createdAt(savedBank.getCreatedAt())
                 .type(savedBank.getType())
-                .build();
+                .build();*/
 
-
+        BankAccountResponseDTO bankAccountResponseDTO = accountMapper.fromBankAccount(savedBank); //cette seule ligne remplace tout le code en commentaire par ce qu'on a utilisé le mapper
         return bankAccountResponseDTO;
     }
 }

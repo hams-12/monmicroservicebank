@@ -3,6 +3,7 @@ package com.hams.mabanquemicroservice.web;
 import com.hams.mabanquemicroservice.dto.BankAccountRequestDTO;
 import com.hams.mabanquemicroservice.dto.BankAccountResponseDTO;
 import com.hams.mabanquemicroservice.entities.BankAccount;
+import com.hams.mabanquemicroservice.mappers.AccountMapper;
 import com.hams.mabanquemicroservice.repositories.BankAccountRepository;
 import com.hams.mabanquemicroservice.service.AccountService;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,12 @@ import java.util.UUID;
 public class AccountRestController {
     private BankAccountRepository bankAccountRepository;
     private AccountService accountService;
+    private AccountMapper accountMapper;
 
-    public AccountRestController(BankAccountRepository bankAccountRepository, AccountService accountService) {
+    public AccountRestController(BankAccountRepository bankAccountRepository, AccountService accountService, AccountMapper accountMapper) {
         this.bankAccountRepository = bankAccountRepository;
         this.accountService = accountService;
+        this.accountMapper = accountMapper;
     }
 
     @GetMapping("/bankAccounts")
